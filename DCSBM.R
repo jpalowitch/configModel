@@ -31,10 +31,3 @@ DCSBM <- function (degrees, memberships, P) {
   
 }
 
-
-P <- matrix(c(0.06, 0.04, 0.00,
-              0.04, 0.12, 0.04,
-              0.00, 0.04, 0.66), ncol = 3)
-membership <- c(rep(1, 100), rep(2, 100), rep(3, 100))
-degrees <- rep(50, 300)
-G <- DCSBM(degrees, membership, P)

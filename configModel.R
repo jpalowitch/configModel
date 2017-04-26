@@ -10,8 +10,6 @@ configModel <- function (degrees = rep(n, floor(n / 2)),
     K <- max(membership)
     if (nrow(P) != K)
       stop('P must have K rows\n')
-    if (var(rowSums(P)) != 0)
-      stop('row sums of P must all be equal\n')
   }
   
   # Checking degrees / membership
@@ -23,7 +21,6 @@ configModel <- function (degrees = rep(n, floor(n / 2)),
   
   # Initializing objects
   edge_list <- matrix(0, dT / 2, 2)
-  set.seed(12345)
   edge_set <- unlist(lapply(1:n, function (u) rep(u, degrees[u])))
   edge_set <- sample(edge_set)
   remaining <- rep(TRUE, length(edge_set))
@@ -54,14 +51,4 @@ configModel <- function (degrees = rep(n, floor(n / 2)),
   
   G <- graph.edgelist(edge_list, directed = FALSE)
   return(G)
-}
-
-if (FALSE) {
-  P <- matrix(c(0.06, 0.06, 0.00,
-                0.04, 0.12, 0.04,
-                0.00, 0.04, 0.66), ncol = 3)
-  P <- t(apply(P, 1, function (r) r / sum(r)))
-  membership <- c(rep(1, 100), rep(2, 100), rep(3, 100))
-  degrees <- rep(50, 300)
-  G <- configModel(degrees, membership, P)
 }
